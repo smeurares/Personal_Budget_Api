@@ -1,9 +1,9 @@
 const faker = require("faker");
+const casual = require('casual')
 
 let envelopeId = 1;
 
-const createEnvelope = (budget) => {
-  const categories = [
+const categories = [
     "groceries",
     "health",
     "grooming",
@@ -18,22 +18,22 @@ const createEnvelope = (budget) => {
     "war",
   ];
 
+const createEnvelopes = (budget = 100) => {
+  
   const random = Math.floor(Math.random() * categories.length);
 
   return {
     id: `${envelopeId++}`,
-    name: categories[random],
     category: categories[random],
-    budget: budget,
+    money: budget,
   };
 };
 
-const allEnvelopes = new Array(10).fill(0).map(createEnvelope);
+const allEnvelopes = categories.map((price, index) => {
+   price = index * 2;
+   const envelope = createEnvelopes(price)
+   return envelope;
+}) 
 
-const db = {
-  allEnvelopes: {
-    data: allEnvelopes,
-  },
-};
 
-module.exports = { db, createEnvelope };
+module.exports = { allEnvelopes};

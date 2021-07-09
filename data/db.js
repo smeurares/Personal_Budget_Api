@@ -18,20 +18,21 @@ const categories = [
     "war",
   ];
 
-const createEnvelopes = (budget = 100) => {
+const createEnvelope = (budget, category) => {
   
   const random = Math.floor(Math.random() * categories.length);
 
   return {
     id: `${envelopeId++}`,
-    category: categories[random],
+    category: categories[category],
     money: budget,
   };
 };
 
-const allEnvelopes = categories.map((price, index) => {
-   price = index * 2;
-   const envelope = createEnvelopes(price)
+const allEnvelopes = categories.map((price, index, category) => {
+   price = index * 2 + 1;
+   category = index
+   const envelope = createEnvelope(price, category)
    return envelope;
 }) 
 

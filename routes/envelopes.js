@@ -1,10 +1,15 @@
 const envelopesRouter = require('express').Router();
-const { allEnvelopes} = require('../data/db')
+const { envelopes } = require('../data/db')
 
 module.exports = envelopesRouter;
 
-envelopesRouter.get('/', function(req, res, next) {
-    const envelope = allEnvelopes;
-    console.log(envelope)
-    res.send(envelope)
+envelopesRouter.get('/', (req, res, next) => {
+    res.send(envelopes)
   });
+
+// envelopesRouter.post('/', (req, res, next) => {
+    
+//     const newBudget = createBudget(req.query.budget);
+//     console.log(newBudget)
+//     res.status(201).send(newBudget)
+// })

@@ -1,40 +1,87 @@
 const faker = require("faker");
-const casual = require('casual')
+const casual = require("casual");
 
-let envelopeId = 1;
+const envelopes = [
+    {
+        id: 1,
+        title: 'groceries',
+        budget: 200
+    },
+    {
+        id: 2,
+        title: 'health',
+        budget: 400
+    },
+    {
+        id: 3,
+        title: 'household',
+        budget: 300
+    },
+    {
+        id: 4,
+        title: 'vices',
+        budget: 50
+    },
+    {
+        id: 5,
+        title: 'rent',
+        budget: 500
+    },
+    {
+        id: 6,
+        title: 'business',
+        budget: 2000
+    },
+    {
+        id: 7,
+        title: 'exentricity',
+        budget: 5000
+    },
+    {
+        id: 8,
+        title: 'legal',
+        budget: 7000
+    },
+]
 
-const categories = [
-    "groceries",
-    "health",
-    "grooming",
-    "vices",
-    "bussines",
-    "exentricity",
-    "dating",
-    "travel",
-    "clothing",
-    "household",
-    "investing",
-    "war",
-  ];
+const getNewId = (array) => {
+  if (array.length > 0) {
+      return array[array.length - 1].id + 1
+  } else {
+      return 1
+  }
+}
 
-const createEnvelope = (budget, category) => {
-  
-  const random = Math.floor(Math.random() * categories.length);
 
+const addEnvelope = (budget, category) => {
+  const newEnvelope = {
+    id: getNewId(envelopes),
+    title: category,
+    budget: budget
+  }
+  if(newEnvelope) {
+    envelopes.push(newEnvelope)
+    return envelopes;
+  }
+};
+
+
+
+const createBudget = (budget) => {
+  const envelopesBudget = allEnvelopes.map((category) => {
+
+    const budgetForEnvelope = budget / categories.length;
+    amount.money = budgetForEnvelope;
+    createEnvelope(amount.money, amount.category);
+  });
+
+   const definedBudget = budget
+   console.log(envelopesBudget)
   return {
-    id: `${envelopeId++}`,
-    category: categories[category],
-    money: budget,
+    id: `${budgetId++}`,
+    budget: definedBudget,
+    envelopes: envelopesBudget,
   };
 };
 
-const allEnvelopes = categories.map((price, index, category) => {
-   price = index * 2 + 1;
-   category = index
-   const envelope = createEnvelope(price, category)
-   return envelope;
-}) 
-
-
-module.exports = { allEnvelopes};
+module.exports = { envelopes, addEnvelope };

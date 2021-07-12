@@ -1,16 +1,16 @@
 var express = require('express');
-var router = express.Router();
+var indexRouter = express.Router();
 
 
 const envelopesRouter = require('./envelopes');
 
-router.get('/', function(req, res, next) {
+indexRouter.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.use('/envelopes', envelopesRouter)
+indexRouter.use('/envelopes', envelopesRouter)
 
 
 
 
-module.exports = router;
+module.exports = indexRouter;

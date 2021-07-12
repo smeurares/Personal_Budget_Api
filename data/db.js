@@ -13,45 +13,56 @@ const envelopes = [
         budget: 400
     },
     {
-        id: 1,
+        id: 3,
         title: 'household',
         budget: 300
     },
     {
-        id: 1,
+        id: 4,
         title: 'vices',
         budget: 50
     },
     {
-        id: 1,
+        id: 5,
         title: 'rent',
         budget: 500
     },
     {
-        id: 1,
+        id: 6,
         title: 'business',
         budget: 2000
     },
     {
-        id: 1,
+        id: 7,
         title: 'exentricity',
         budget: 5000
     },
     {
-        id: 1,
+        id: 8,
         title: 'legal',
         budget: 7000
     },
 ]
 
-const createEnvelope = (budget, category) => {
-  const random = Math.floor(Math.random() * categories.length);
+const getNewId = (array) => {
+  if (array.length > 0) {
+      return array[array.length - 1].id + 1
+  } else {
+      return 1
+  }
+}
 
-  return {
-    id: `${envelopeId++}`,
-    category: categories[category],
-    money: budget,
-  };
+
+const addEnvelope = (budget, category) => {
+  const newEnvelope = {
+    id: getNewId(envelopes),
+    title: category,
+    budget: budget
+  }
+  if(newEnvelope) {
+    envelopes.push(newEnvelope)
+    return envelopes;
+  }
 };
 
 
@@ -73,4 +84,4 @@ const createBudget = (budget) => {
   };
 };
 
-module.exports = { envelopes };
+module.exports = { envelopes, addEnvelope };

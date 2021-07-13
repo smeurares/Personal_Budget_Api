@@ -1,5 +1,5 @@
 const envelopesRouter = require("express").Router();
-const { envelopes, addEnvelope, updateBudget } = require("../data/db");
+const { envelopes, addEnvelope, updateBudget, deleteEnvelope } = require("../data/db");
 
 module.exports = envelopesRouter;
 
@@ -38,3 +38,10 @@ envelopesRouter.put("/:envelopeId", (req, res, next) => {
   }
   res.send("Updated successfully");
 });
+
+envelopesRouter.delete('/:envelopeId', (req, res, next) => {
+  deleteEnvelope(req.params.id)
+  
+  res.send("Successfully deleted entry");
+})
+

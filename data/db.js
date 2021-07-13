@@ -1,7 +1,7 @@
 const faker = require("faker");
 const casual = require("casual");
 
-const envelopes = [
+let envelopes = [
     {
         id: 1,
         title: 'groceries',
@@ -89,4 +89,10 @@ const createBudget = (budget) => {
   };
 };
 
-module.exports = { envelopes, addEnvelope, updateBudget };
+const deleteEnvelope = (id) => {
+  const envelopeId = Number(id);
+  envelopes = envelopes.filter(envelope => envelope.id !== envelopeId)
+  return envelopes
+}
+
+module.exports = { envelopes, addEnvelope, updateBudget,deleteEnvelope };

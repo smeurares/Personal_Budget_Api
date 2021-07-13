@@ -41,7 +41,7 @@ envelopesRouter.put("/:envelopeId", (req, res, next) => {
 
 envelopesRouter.delete('/:envelopeId', (req, res, next) => {
   deleteEnvelope(req.params.id)
-  
   res.send("Successfully deleted entry");
 })
+
 

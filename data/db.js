@@ -65,6 +65,11 @@ const addEnvelope = (budget, category) => {
   }
 };
 
+const updateBudget = (budget, id) => {
+  envelopes[id].budget = budget;
+  return envelopes[id]
+}
+
 
 
 const createBudget = (budget) => {
@@ -84,4 +89,4 @@ const createBudget = (budget) => {
   };
 };
 
-module.exports = { envelopes, addEnvelope };
+module.exports = { envelopes, addEnvelope, updateBudget };

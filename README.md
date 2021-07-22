@@ -14,6 +14,11 @@ npm install
 npm start
 ```
 
+## Technologies
+
+* Node
+* Express
+
 ## Interesting problems
 
 1. I had to learn what is the difference between req.body, req.params and req.query. For further reference I will put them here:

@@ -13,7 +13,7 @@ const updateEnvelope = (req, res, next) => {
       break;
     }
   }
-  res.send("Updated successfully");
+  res.send("Envelope was updated!");
 };
 
 module.exports = updateEnvelope;

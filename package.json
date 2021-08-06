@@ -13,7 +13,9 @@
     "express": "~4.16.1",
     "faker": "^5.5.3",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "jade": "^0.31.2",
+    "morgan": "~1.9.1",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   }
 }

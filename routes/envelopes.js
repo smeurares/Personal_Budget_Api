@@ -14,16 +14,18 @@ envelopesRouter.use((req, res, next) => {
   next();
 });
 
-envelopesRouter.get("/", getAllEnvelopes);
 
-envelopesRouter.post("/", addEnvelope);
+
+envelopesRouter.get("/", getAllEnvelopes); //documented
+
+envelopesRouter.post("/", addEnvelope); //documented
 
 envelopesRouter.post("/:fromId/transfer/:toId", transferBudget);
 
-envelopesRouter.get("/:envelopeId", getEnvelope);
+envelopesRouter.get("/:envelopeId", getEnvelope); //documented
 
-envelopesRouter.put("/:envelopeId", updateEnvelope);
+envelopesRouter.put("/:envelopeId", updateEnvelope); //documented
 
-envelopesRouter.delete("/:envelopeId", removeEnvelope);
+envelopesRouter.delete("/:envelopeId", removeEnvelope); //documented
 
 module.exports = envelopesRouter;

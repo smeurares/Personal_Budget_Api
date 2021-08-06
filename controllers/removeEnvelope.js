@@ -12,7 +12,7 @@ const removeEnvelope =  (req, res) => {
     }
 
     const updatedEnvelopes = deleteEnvelope(envelopeId);
-    return res.status(204).send(updatedEnvelopes);
+    return res.send(updatedEnvelopes);
     
   } catch (err) {
     res.status(500).send(err);

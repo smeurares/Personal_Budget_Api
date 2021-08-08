@@ -1,10 +1,14 @@
 const { findById } = require("../data/db");
 
 const transferBudget = (req, res, next) => {
+  // #swagger.description = 'Endpoint used to transfer budget from an envelope to another.'
+  // #swagger.summary = 'Transfer budget'
+  // #swagger.tags = ['Envelopes']
+
   try {
     const fromId = req.params.fromId;
     const toId = req.params.toId;
-    console.log(req.body)
+    console.log(req.body);
     const amount = req.body.amount;
     console.log("amount " + parseInt(amount));
 
@@ -25,7 +29,7 @@ const transferBudget = (req, res, next) => {
 
     amountTo.budget += amount;
     amountFrom.budget -= amount;
-    console.log(amountTo, amountFrom)
+    console.log(amountTo, amountFrom);
 
     return res.status(201).send(amountFrom);
   } catch (err) {

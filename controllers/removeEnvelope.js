@@ -1,6 +1,10 @@
 const { deleteEnvelope, findById } = require("../data/db");
 
-const removeEnvelope =  (req, res) => {
+const removeEnvelope = (req, res) => {
+  // #swagger.description = 'Endpoint used to remove an envelope.'
+  // #swagger.summary = 'Remove an envelope'
+  // #swagger.tags = ['Envelopes']
+
   try {
     const envelopeId = req.params.envelopeId;
     const envelope = findById(envelopeId);
@@ -13,7 +17,6 @@ const removeEnvelope =  (req, res) => {
 
     const updatedEnvelopes = deleteEnvelope(envelopeId);
     return res.send(updatedEnvelopes);
-    
   } catch (err) {
     res.status(500).send(err);
   }

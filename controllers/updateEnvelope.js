@@ -1,6 +1,10 @@
 const { envelopes } = require("../data/db");
 
 const updateEnvelope = (req, res, next) => {
+  // #swagger.description = 'Endpoint used to update an envelope.'
+  // #swagger.summary = 'Update an envelope'
+  // #swagger.tags = ['Envelopes']
+
   const updatedEnvelope = {
     id: Number(req.params.envelopeId),
     title: req.query.title,

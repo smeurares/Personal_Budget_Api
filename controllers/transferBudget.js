@@ -1,21 +1,21 @@
-const { findById } = require("../data/db");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-const transferBudget = (req, res, next) => {
+const transferBudget = async (req, res, next) => {
   // #swagger.description = 'Endpoint used to transfer budget from an envelope to another.'
   // #swagger.summary = 'Transfer budget'
   // #swagger.tags = ['Envelopes']
+  //  #swagger.parameters['fromId'] = { description: 'from ID', type: 'integer' }
+  //  #swagger.parameters['toId'] = { description: 'to ID', type: 'integer' }
 
   try {
     const fromId = req.params.fromId;
     const toId = req.params.toId;
-    console.log(req.body);
     const amount = req.body.amount;
-    console.log("amount " + parseInt(amount));
-
-    let amountFrom = findById(fromId);
-    console.log(amountFrom.budget);
-    let amountTo = findById(toId);
-    console.log(amountTo.budget);
+    const allEnvelopes = await prisma.envelopes.findMany();
+    let amountFrom = allEnvelopes.find(element => element.id === Number(fromId))
+    let amountTo = allEnvelopes.find(element => element.id === Number(toId))
+   
 
     if (!amountFrom || !amountTo) {
       return res.send({

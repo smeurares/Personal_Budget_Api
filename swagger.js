@@ -23,7 +23,7 @@ const doc = {
         Envelopes: {
             id: "integer",
             title: "string",
-            budget: "number"
+            budget: "integer"
         }
     }
 }

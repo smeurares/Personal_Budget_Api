@@ -22,11 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 
-indexRouter.use("/envelopes", envelopesRouter);
 
-//generate the swagger docs
-
-indexRouter.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

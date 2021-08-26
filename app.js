@@ -2,25 +2,61 @@ const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
-const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./swagger_output.json");
-const swaggerJsdoc = require("swagger-jsdoc");
+const initializePassport = require("./auth");
 const indexRouter = require("./routes/index");
-const envelopesRouter = require("./routes/envelopes");
 const app = express();
+const passport = require("passport");
+const { PrismaClient } = require("@prisma/client");
+const flash = require("express-flash");
+const session = require("express-session");
+const { json } = require("express");
+const prisma = new PrismaClient();
+
+initializePassport(
+  passport,
+  async (email) => {
+    const users = await prisma.user.findMany();
+    console.log(users)
+    if (users) {
+      const user = users.find((user) => user.email === email);
+      console.log(user)
+      return user
+    }
+  },
+  async (id) => {
+    const users = await prisma.user.findMany();
+    if (users) {
+      const user = users.find((user) => user.id === id);
+      console.log(user);
+      return user;
+    }
+  }
+)
+
 
 // view engine setup
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
-app.use(logger("dev"));
-app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+app.use(logger("dev"));
+app.use(express.json());
+
+
 app.use("/", indexRouter);
+
 
 
 

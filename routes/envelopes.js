@@ -14,7 +14,7 @@ envelopesRouter.use((req, res, next) => {
   next();
 });
 
-envelopesRouter.get("/", getAllEnvelopes); //documented
+envelopesRouter.get("/:userId", getAllEnvelopes); //documented
 
 envelopesRouter.post("/", addEnvelope); //documented
 

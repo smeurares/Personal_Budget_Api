@@ -13,5 +13,17 @@ generator client {
 model Envelopes {
   id       Int    @id @default(autoincrement())
   title    String
-  budget   Int
+  budget   Decimal
+  user    User?    @relation(fields: [userId], references: [id])
+  userId  Int?
+
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique 
+  name      String?
+  password  String
+  envelopes  Envelopes[]
 }

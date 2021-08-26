@@ -1,9 +1,62 @@
-var express = require('express');
-var router = express.Router();
+const { EWOULDBLOCK } = require("constants");
+const express = require("express");
+const { get } = require("node:https");
+const authRouter = express.Router();
+const passport = require("passport");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const { signUp, getAllUsers } = require("../controllers/signUp");
 
-module.exports = router;
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+
+  res.redirect('/')
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/')
+  }
+  next()
+}
+
+
+authRouter.post("/signup",checkNotAuthenticated, signUp);
+
+authRouter.get("/signup", getAllUsers);
+
+authRouter.get("/login", (req, res) => {
+  if(req.isAuthenticated){
+    res.redirect('/content')
+  } else {
+    res.redirect('/auth/login')
+  }
+})
+
+
+authRouter.post('/login', passport.authenticate('local', {
+  successRedirect: `/auth/content`,
+  failureRedirect: '/auth/login',
+  failureFlash: true
+}))
+
+
+authRouter.delete('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/')
+})
+
+
+authRouter.get("/content", async (req, res) => {
+  if(req.isAuthenticated){
+    const {id, email, name} = await req.user;
+    
+    res.json({id: id, email: email, name: name})
+  }
+  
+})
+
+
+
+module.exports = authRouter;

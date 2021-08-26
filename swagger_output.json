@@ -25,20 +25,29 @@
     "application/json"
   ],
   "paths": {
-    "/": {
+    "/{userId}": {
       "get": {
         "tags": [
           "Envelopes"
         ],
         "summary": "Get all envelopes",
         "description": "Endpoint used to get all envelopes.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "500": {
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/": {
       "post": {
         "tags": [
           "Envelopes"
@@ -56,6 +65,9 @@
                   "example": "any"
                 },
                 "title": {
+                  "example": "any"
+                },
+                "userId": {
                   "example": "any"
                 }
               }

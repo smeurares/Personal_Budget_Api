@@ -5,9 +5,8 @@ const getAllEnvelopes = async (req, res, next) => {
   // #swagger.description = 'Endpoint used to get all envelopes.'
   // #swagger.summary = 'Get all envelopes'
   // #swagger.tags = ['Envelopes']
-
-  
-    const userId = Number(req.params.userId)
+try {
+  const userId = Number(req.params.userId)
     console.log(userId)
     const envelopes = await prisma.envelopes.findMany({
       where: {userId: userId}
@@ -16,7 +15,12 @@ const getAllEnvelopes = async (req, res, next) => {
     if (!envelopes) {
       res.send("There are no envelopes");
     }
-    res.json(envelopes);
+    res.json({envelopes: envelopes, success: true});
+} catch (error) {
+  res.status(500).send({error: error, success:false})
+}
+  
+    
   
 };
 

@@ -52,7 +52,9 @@ authRouter.get("/content", async (req, res) => {
   if(req.isAuthenticated){
     const {id, email, name} = await req.user;
     
-    res.json({id: id, email: email, name: name})
+    res.json({id: id, email: email, name: name, authenticated: true})
+  } else {
+    res.json({succes: false, autheticated: false})
   }
   
 })

@@ -20,10 +20,10 @@ envelopesRouter.post("/", addEnvelope); //documented
 
 envelopesRouter.post("/:fromId/transfer/:toId", transferBudget);
 
-envelopesRouter.get("/:envelopeId", getEnvelope); //documented
+envelopesRouter.get("/:userId/:envelopeId", getEnvelope); //documented
 
 envelopesRouter.put("/:envelopeId", updateEnvelope); //documented
 
-envelopesRouter.delete("/:envelopeId", removeEnvelope); //documented
+envelopesRouter.delete("/:userId/:envelopeId", removeEnvelope); //documented
 
 module.exports = envelopesRouter;

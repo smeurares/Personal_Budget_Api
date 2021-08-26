@@ -16,8 +16,8 @@ const updateEnvelope = async (req, res, next) => {
                 description: 'budget',
                 type: 'integer'
         } */
-  
-  const allEnvelopes = await prisma.envelopes.findMany();
+  try {
+    const allEnvelopes = await prisma.envelopes.findMany();
  
   const envelopeId = req.params.envelopeId
   const envelopeById = allEnvelopes.find(element => element.id === Number(envelopeId));
@@ -26,10 +26,14 @@ const updateEnvelope = async (req, res, next) => {
       where: { id: Number(envelopeId) },
       data: { title: req.query.title, budget: Number(req.query.budget) },
     })
-    res.json({updated, message: 'Envelope was updated!'});
+    res.json({updated: updated, success: true});
   } else {
-    res.json({message: 'Envelope not found'})
+    res.json({message: 'Envelope not found', success: false})
   }
+  } catch (error) {
+   res.status(500).send({success: false})
+  }
+  
   
 };
 

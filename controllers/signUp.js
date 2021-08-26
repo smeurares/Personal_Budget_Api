@@ -10,15 +10,15 @@ const signUp = async (req, res) => {
 
     console.log(email);
     if (!email || !password) {
-      res.status(400).send({ msg: "Please pass email and password." });
+      res.status(400).send({ msg: "Please pass email and password.", success: false });
     } else {
       const newUser = await prisma.user.create({
         data: { email: email, name: name, password: hashedPassword },
       });
-      res.json(newUser);
+      res.json({newUser: newUser, success: true});
     }
   } catch (error) {
-    res.status(500).send({error, message: 'Failure!'});
+    res.status(500).send({error, success: false});
   }
 };
 
@@ -30,11 +30,11 @@ const getAllUsers = async (req, res) => {
         });
         console.log(users);
         if (!users) {
-          res.send("There are no users");
+          res.send({msg: "There are no users", success: false});
         }
-        res.json(users); 
+        res.json({users: users, success: true}); 
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send({success: false});
     }
 }
 

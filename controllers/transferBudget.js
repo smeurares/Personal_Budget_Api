@@ -31,9 +31,9 @@ const transferBudget = async (req, res, next) => {
     amountFrom.budget -= amount;
     console.log(amountTo, amountFrom);
 
-    return res.status(201).send(amountFrom);
+    return res.status(201).send({amountFrom: amountFrom, amountTo: amountTo, success: true});
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({success: false});
   }
 };
 

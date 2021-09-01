@@ -18,6 +18,8 @@ npm start
 
 * Node
 * Express
+* Prisma
+* Postgresql
 
 ## Interesting problems
 

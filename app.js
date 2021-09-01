@@ -11,6 +11,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const { json } = require("express");
 const prisma = new PrismaClient();
+const cors = require("cors");
 
 initializePassport(
   passport,
@@ -37,7 +38,7 @@ initializePassport(
 // view engine setup
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(cors())
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 app.use(
@@ -53,6 +54,12 @@ app.use(passport.session());
 app.use(flash());
 app.use(logger("dev"));
 app.use(express.json());
+
+const corsOptions = {
+  credentials: true,
+};
+
+
 
 
 app.use("/", indexRouter);

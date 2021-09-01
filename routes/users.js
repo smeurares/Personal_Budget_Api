@@ -28,7 +28,7 @@ authRouter.get("/signup", getAllUsers);
 
 authRouter.get("/login", (req, res) => {
   if(req.isAuthenticated){
-    res.redirect('/content')
+    res.redirect('/auth/content')
   } else {
     res.redirect('/auth/login')
   }
@@ -50,6 +50,7 @@ authRouter.delete('/logout', (req, res) => {
 
 authRouter.get("/content", async (req, res) => {
   if(req.isAuthenticated){
+    console.log(req.user)
     const {id, email, name} = await req.user;
     
     res.json({id: id, email: email, name: name, authenticated: true})

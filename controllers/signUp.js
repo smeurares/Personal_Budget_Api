@@ -38,6 +38,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+
 const findUserById = async (id) => {
   const user = await prisma.user.findFirst({
     where: { id: Number(id) },

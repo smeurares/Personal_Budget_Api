@@ -3,7 +3,9 @@ const envelopesRouter = require("express").Router();
 const getAllEnvelopes = require("../controllers/getAllEnvelopes");
 const addEnvelope = require("../controllers/addEnvelope");
 const getEnvelope = require("../controllers/getEnvelope");
-const updateEnvelope = require("../controllers/updateEnvelope");
+const updateEnvelopeBudget = require("../controllers/updateEnvelopeBudget");
+const updateEnvelopeTitle = require("../controllers/updateEnvelopeTitle");
+
 const removeEnvelope = require("../controllers/removeEnvelope");
 const transferBudget = require("../controllers/transferBudget");
 
@@ -22,8 +24,10 @@ envelopesRouter.post("/:fromId/transfer/:toId", transferBudget);
 
 envelopesRouter.get("/:userId/:envelopeId", getEnvelope); //documented
 
-envelopesRouter.put("/:envelopeId", updateEnvelope); //documented
+envelopesRouter.put("/:envelopeId", updateEnvelopeBudget); //documented
 
-envelopesRouter.delete("/:userId/:envelopeId", removeEnvelope); //documented
+envelopesRouter.put("/:envelopeId/title", updateEnvelopeTitle); //documented
+
+envelopesRouter.delete("/:envelopeId", removeEnvelope); //documented
 
 module.exports = envelopesRouter;

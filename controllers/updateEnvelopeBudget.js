@@ -24,7 +24,7 @@ const updateEnvelope = async (req, res, next) => {
   if(envelopeById){
     const updated = await prisma.envelopes.update({
       where: { id: Number(envelopeId) },
-      data: { title: req.query.title, budget: Number(req.query.budget) },
+      data: { budget: Number(req.body.budget) },
     })
     res.json({updated: updated, success: true});
   } else {

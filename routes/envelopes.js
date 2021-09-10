@@ -8,6 +8,8 @@ const updateEnvelopeTitle = require("../controllers/updateEnvelopeTitle");
 
 const removeEnvelope = require("../controllers/removeEnvelope");
 const transferBudget = require("../controllers/transferBudget");
+const { env } = require("process");
+const getBudget = require("../controllers/getBudget");
 
 envelopesRouter.use((req, res, next) => {
   res.append("Access-Control-Allow-Origin", ["*"]);
@@ -17,6 +19,8 @@ envelopesRouter.use((req, res, next) => {
 });
 
 envelopesRouter.get("/:userId", getAllEnvelopes); //documented
+
+envelopesRouter.get("/:userId/sum", getBudget)
 
 envelopesRouter.post("/", addEnvelope); //documented
 
